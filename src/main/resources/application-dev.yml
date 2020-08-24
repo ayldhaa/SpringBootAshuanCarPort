@@ -1,0 +1,35 @@
+server:
+  port: 8091
+
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: admin
+    url: jdbc:mysql://localhost:3306/gzsql?&useSSL=false&serverTimezone=Asia/Shanghai
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.aaa.Entity
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+
+  logging:
+    level:
+      com:
+        aaa:
+          mapper: debug
+
+
+
+
+
+
+
