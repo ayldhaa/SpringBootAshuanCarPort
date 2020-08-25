@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.Dao.Car_seriesDao">
+    <resultMap id="CarSerMapper" type="com.aaa.Entity.Car_series">
+        <result column="id" property="id"></result>
+        <result column="group_id" property="group_id"></result>
+        <result column="brand_id" property="brand_id"></result>
+        <result column="full_name" property="full_name"></result>
+        <result column="csname" property="csname"></result>
+        <result column="firstletter" property="firstletter"></result>
+        <result column="seriesstate" property="seriesstate"></result>
+        <result column="seriesorder" property="seriesorder"></result>
+
+        <association property="car_brand" javaType="com.aaa.Entity.Car_brand">
+            <result column="id" property="id"></result>
+            <result column="name" property="name"></result>
+            <result column="img" property="img"></result>
+            <result column="firstletter" property="firstletter"></result>
+        </association>
+
+        <association property="car_series_group" javaType="com.aaa.Entity.Car_series_group">
+            <result property="id" column="id"></result>
+            <result property="brand_id" column="brand_id"></result>
+            <result property="csgname" column="csgname"></result>
+            <result property="firstletter" column="firstletter"></result>
+        </association>
+    </resultMap>
+
+    <select id="showCarSericeMsg" resultMap="CarSerMapper">
+        select cs.id,csg.csgname,cb.`name`,cs.full_name,cs.csname,cs.firstletter,cs.seriesstate,cs.seriesorder from car_series cs
+                left join car_brand cb on cs.brand_id = cb.id
+                left join car_series_group csg on cs.group_id = csg.id
+    </select>
+
+    <select id="showCarSericePage" resultMap="CarSerMapper">
+        select cs.id,csg.csgname,cb.`name`,cs.full_name,cs.csname,cs.firstletter,cs.seriesstate,cs.seriesorder from car_series cs
+                left join car_brand cb on cs.brand_id = cb.id
+                left join car_series_group csg on cs.group_id = csg.id
+    </select>
+</mapper>

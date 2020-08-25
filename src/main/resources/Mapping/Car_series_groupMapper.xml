@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.Dao.Car_series_groupDao">
+    <resultMap id="CarSerGopMapper" type="com.aaa.Entity.Car_series_group">
+        <result property="id" column="id"></result>
+        <result property="brand_id" column="brand_id"></result>
+        <result property="csgname" column="csgname"></result>
+        <result property="firstletter" column="firstletter"></result>
+        <association property="car_brand" javaType="com.aaa.Entity.Car_brand">
+            <result column="id" property="id"></result>
+            <result column="name" property="name"></result>
+            <result column="img" property="img"></result>
+            <result column="firstletter" property="firstletter"></result>
+        </association>
+    </resultMap>
+
+    <select id="showCarSerGroupMsg" resultMap="CarSerGopMapper">
+        select scg.id,scg.brand_id,cb.`name`,cb.img,scg.csgname,scg.firstletter from car_series_group scg left join car_brand cb on scg.brand_id = cb.id
+    </select>
+
+    <select id="showCarSerGroupPage" resultMap="CarSerGopMapper">
+        select scg.id,scg.brand_id,cb.`name`,cb.img,scg.csgname,scg.firstletter from car_series_group scg left join car_brand cb on scg.brand_id = cb.id
+    </select>
+</mapper>

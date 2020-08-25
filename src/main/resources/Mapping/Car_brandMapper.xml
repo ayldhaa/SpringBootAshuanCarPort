@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.Dao.Car_brandDao">
+    <resultMap id="Car_brandMapper" type="com.aaa.Entity.Car_brand">
+        <result column="id" property="id"></result>
+        <result column="name" property="name"></result>
+        <result column="img" property="img"></result>
+        <result column="firstletter" property="firstletter"></result>
+    </resultMap>
+
+    <select id="showCar_brand" resultMap="Car_brandMapper">
+        select id,name,img,firstletter from car_brand
+    </select>
+
+    <select id="showCar_brandMsg" resultMap="Car_brandMapper">
+        select id,name,img,firstletter from car_brand
+    </select>
+
+    <select id="showCar_brandPage" resultType="com.aaa.Entity.Car_brand">
+        select id,name,img,firstletter from car_brand
+    </select>
+</mapper>
