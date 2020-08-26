@@ -6,6 +6,7 @@ import lombok.ToString;
 
 @Data
 @ToString
+
 public class Customerauth {
 
     private Integer Ctaid;

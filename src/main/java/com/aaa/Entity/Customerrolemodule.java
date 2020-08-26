@@ -11,6 +11,8 @@ public class Customerrolemodule {
     private Integer Rmid;
     private Integer Crid;
     private Integer Mid;
+    private CustomerRole customerRole;
     private Customermodule customermodule;
+
 
 }

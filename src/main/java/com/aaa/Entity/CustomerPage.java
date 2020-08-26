@@ -10,6 +10,7 @@ import java.util.Collection;
 
 @ToString
 @Data
+
 public class CustomerPage {
 
     private Integer cid;
