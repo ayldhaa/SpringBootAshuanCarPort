@@ -2,6 +2,7 @@ package com.aaa.Dao;
 
 import com.aaa.Entity.Customer;
 import com.aaa.Entity.CustomerRole;
+import com.aaa.Entity.Customerrole_cust;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Repository;
@@ -36,6 +37,14 @@ public interface CustomerAllDao {
     /*通过编号查询员工信息*/
     public List<Customer> showCustomerId(Integer cid);
 
+    /*查询员工角色方法*/
+    public List<Customerrole_cust> showCustomerRc(Integer cid);
+
+    /*修改员工角色方法*/
+    public Integer UpCustomerRc(Customerrole_cust customerrole_cust);
+
+    /*添加员工角色方法*/
+    public Integer AddCustomerRole(Customerrole_cust customerrole_cust);
 
 
 
