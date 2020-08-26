@@ -2,6 +2,7 @@ package com.aaa.Imple;
 
 import com.aaa.Entity.Customer;
 import com.aaa.Entity.CustomerRole;
+import com.aaa.Entity.Customerrole_cust;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -23,6 +24,13 @@ public interface CustomerALLImple {
     public List<CustomerRole> showCustomerRole();
 
     public List<Customer> showCustomerId(Integer cid);
+
+    public List<Customerrole_cust> showCustomerRc(Integer cid);
+
+    public Integer UpCustomerRc(Customerrole_cust customerrole_cust);
+
+    public Integer AddCustomerRole(Customerrole_cust customerrole_cust);
+
 
 
 
