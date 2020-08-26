@@ -70,12 +70,25 @@ public class CustomerAllController {
         return customerAllService.showCustomerId(cid);
     }
 
+    @PreAuthorize("hasRole('ROLE_ROOT') and hasAuthority('delete')")
     @PostMapping("/UpCustomerRole")
     public Integer UpCustomerRole(@RequestBody Customerrole_cust customerrole_cust)
     {
-        System.out.println("获取该对象:"+customerrole_cust);
-        return 1;
+        List<Customerrole_cust> customerrole_custs =customerAllService.showCustomerRc(customerrole_cust.getCid());
+        customerrole_cust.setCuid(customerrole_custs.get(0).getCuid());
+        return customerAllService.UpCustomerRc(customerrole_cust);
     }
+
+    @PreAuthorize("hasRole('ROLE_ROOT') and hasAuthority('delete')")
+    @PostMapping("/AddCustomerRole")
+    public Integer AddCustomerRole(@RequestBody Customerrole_cust customerrole_cust)
+    {
+        System.out.println("获取要添加的对象"+customerrole_cust);
+        System.out.println("查询id"+customerrole_cust.getCid());
+        return customerAllService.AddCustomerRole(customerrole_cust);
+    }
+
+
 
 
 
