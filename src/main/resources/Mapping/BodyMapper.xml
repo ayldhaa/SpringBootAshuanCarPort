@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 外观配置 -->
+<mapper namespace="com.aaa.Dao.BodyDao">
+
+    <resultMap id="bodyMapper" type="com.aaa.Entity.Body">
+        <result column="len" property="len"></result>
+        <result column="width" property="width"></result>
+        <result column="height" property="height"></result>
+        <result column="electricluggage" property="electricluggage"></result>
+        <result column="sportpackage" property="sportpackage"></result>
+        <result column="luggagevolume" property="luggagevolume"></result>
+    </resultMap>
+
+    <select id="showBody" resultMap="bodyMapper">
+        select len,width,height,electricluggage,sportpackage,luggagevolume from body
+    </select>
+
+    <insert id="addBody">
+        insert into body values(#{len},#{width},#{height},#{electricluggage},#{sportpackage},#{luggagevolume})
+    </insert>
+</mapper>

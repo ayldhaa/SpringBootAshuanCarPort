@@ -1,0 +1,25 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.Dao.ReceptionTestIngPeopleDao">
+
+    <resultMap id="TestingPeopleMap" type="com.aaa.Entity.ReceptionTestIngPeople">
+        <result property="ctid" column="ctid"></result>
+        <result property="ctname" column="ctname"></result>
+        <result property="cpeoplename" column="cpeoplename"></result>
+        <result property="ctelphone" column="ctelphone"></result>
+        <result property="cuaddress" column="cuaddress"></result>
+        <result property="cloginname" column="cloginname"></result>
+        <result property="cpassword" column="cpassword"></result>
+        <result property="cstatus" column="cstatus"></result>
+        <result property="cpig" column="cpig"></result>
+        <result property="cprice" column="cprice"></result>
+    </resultMap>
+
+    <select id="shwoCustomerTestIngPeople" resultMap="TestingPeopleMap">
+        select * from CustomerTestIngPeople
+    </select>
+
+
+
+</mapper>

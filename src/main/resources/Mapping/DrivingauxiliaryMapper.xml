@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 驾驶辅助设备配置 -->
+<mapper namespace="com.aaa.Dao.DrivingauxiliaryDao">
+
+    <resultMap id="DrivingMapper" type="com.aaa.Entity.Drivingauxiliary">
+        <result column="abs" property="abs"></result>
+        <result column="ebd" property="ebd"></result>
+        <result column="brakeassist" property="brakeassist"></result>
+        <result column="nightvisionsystem" property="nightvisionsystem"></result>
+        <result column="hillstartassist" property="hillstartassist"></result>
+        <result column="reverseimage" property="reverseimage"></result>
+    </resultMap>
+
+    <select id="showDrivingauxiliary" resultMap="DrivingMapper">
+        select abs,ebd,brakeassist,nightvisionsystem,hillstartassist,reverseimage from drivingauxiliary
+    </select>
+
+    <insert id="addDrivingauxiliary">
+        insert into drivingauxiliary values(#{abs},#{ebd},#{brakeassist},#{nightvisionsystem},#{hillstartassist},#{reverseimage})
+    </insert>
+</mapper>

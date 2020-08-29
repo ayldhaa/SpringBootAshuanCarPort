@@ -1,0 +1,25 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.Dao.ReceptionCellCarDao">
+
+
+    <resultMap id="CellCarMsgMap" type="com.aaa.Entity.Customercellcar">
+        <result property="cellid" column="cellid"></result>
+        <result property="cuid" column="cuid"></result>
+        <result property="CIid" column="CIid"></result>
+        <result property="carId" column="carId"></result>
+        <result property="carName" column="carName"></result>
+        <result property="carImg" column="carImg"></result>
+    </resultMap>
+
+    <insert id="AddCellCar">
+        insert into customercellcar values(null,#{cuid},#{CIid},#{carId},#{carName},#{carImg})
+    </insert>
+
+    <select id="showCustomerCellCar" resultMap="CellCarMsgMap">
+        select * from customercellcar where cuid =#{cuid}
+    </select>
+
+
+</mapper>

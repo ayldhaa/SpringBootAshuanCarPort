@@ -1,0 +1,22 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.Dao.DoormirrorDao">
+
+    <resultMap id="DoormirrorMap" type="com.aaa.Entity.Doormirror">
+        <result property="doorid" column="doorid"></result>
+        <result property="electricwindow" column="electricwindow"></result>
+        <result property="skylightstype" column="skylightstype"></result>
+        <result property="sensingwiper" column="sensingwiper"></result>
+        <result property="externalmirroradjustment" column="externalmirroradjustment"></result>
+        <result property="autoheadlight" column="autoheadlight"></result>
+        <result property="sunvisormirror" column="sunvisormirror"></result>
+    </resultMap>
+
+    <insert id="AddDoormirror">
+        insert into doormirror values(#{electricwindow},#{skylightstype},#{sensingwiper},#{externalmirroradjustment},#{autoheadlight},#{sunvisormirror})
+    </insert>
+
+
+
+</mapper>

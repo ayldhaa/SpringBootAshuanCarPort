@@ -1,0 +1,146 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.Dao.CustomerModuleDao">
+
+    <resultMap id="CustomerModuleMap" type="com.aaa.Entity.Customermodule">
+        <result property="Mid" column="Mid"></result>
+        <result property="Mname" column="Mname"></result>
+        <result property="Murl" column="Murl"></result>
+        <collection property="customerfunList" ofType="com.aaa.Entity.Customerfun">
+            <result property="Gid" column="Gid"></result>
+            <result property="Gname" column="Gname"></result>
+            <result property="Gname" column="Gname"></result>
+            <result property="Gnames" column="Gnames"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="CustomerMap" type="com.aaa.Entity.Customer">
+        <result property="cid" column="cid"></result>
+        <result property="cname" column="cname"></result>
+        <result property="ctname" column="ctname"></result>
+        <result property="ctelphone" column="ctelphone"></result>
+        <result property="caddress" column="caddress"></result>
+        <result property="cidcard" column="cidcard"></result>
+        <result property="csex" column="csex"></result>
+        <result property="cpassword" column="cpassword"></result>
+        <result property="handpic" column="handpic"></result>
+        <result property="cstatus" column="cstatus"></result>
+        <result property="isexpired" column="isexpired"></result>
+        <result property="islocked" column="islocked"></result>
+        <result property="isCreExpired" column="isCreExpired"></result>
+        <result property="isenable" column="isenable"></result>
+
+        <association property="customerauth" javaType="com.aaa.Entity.Customerauth">
+            <result property="Ctaid" column="Ctaid"></result>
+            <result property="Cid" column="Cid"></result>
+            <result property="Caid" column="Caid"></result>
+        </association>
+
+        <association property="customerAuthority" javaType="com.aaa.Entity.CustomerAuthority">
+            <result property="Caid" column="Caid"></result>
+            <result property="Caname" column="Caname"></result>
+        </association>
+        <association property="customerfun" javaType="com.aaa.Entity.Customerfun">
+            <result property="Gid" column="Gid"></result>
+            <result property="Gname" column="Gname"></result>
+            <result property="Mid" column="Mid"></result>
+            <result property="Gnames" column="Gnames"></result>
+        </association>
+
+        <association property="customermodule" javaType="com.aaa.Entity.Customermodule">
+            <result property="Mid" column="Mid"></result>
+            <result property="Mname" column="Mname"></result>
+            <result property="Murl" column="Murl"></result>
+        </association>
+
+        <association property="customerRole" javaType="com.aaa.Entity.CustomerRole">
+            <result property="Crid" column="Crid"></result>
+            <result property="Crname" column="Crname"></result>
+            <result property="Crstate" column="Crstate"></result>
+        </association>
+
+        <association property="customerrole_cust" javaType="com.aaa.Entity.Customerrole_cust">
+            <result property="Cuid" column="Cuid"></result>
+            <result property="Cid" column="Cid"></result>
+            <result property="Crid" column="Crid"></result>
+        </association>
+
+        <association property="customerrolemodule" javaType="com.aaa.Entity.Customerrolemodule">
+            <result property="Rmid" column="Rmid"></result>
+            <result property="Crid" column="Crid"></result>
+            <result property="Mid" column="Mid"></result>
+        </association>
+
+
+
+    </resultMap>
+
+
+
+
+    <resultMap id="customerrolemoduleMap" type="com.aaa.Entity.Customerrolemodule">
+        <result property="rmid" column="rmid"></result>
+        <result property="rid" column="rid"></result>
+        <result property="mid" column="mid"></result>
+        <association property="customerRole" javaType="com.aaa.Entity.CustomerRole">
+            <result property="rid" column="rid"></result>
+            <result property="rname" column="rname"></result>
+            <result property="rnames" column="rnames"></result>
+        </association>
+        <association property="customermodule" javaType="com.aaa.Entity.Customermodule">
+            <result property="mid" column="mid"></result>
+            <result property="mname" column="mname"></result>
+            <result property="murl" column="murl"></result>
+        </association>
+    </resultMap>
+
+
+
+
+
+
+
+
+
+    <select id="showCustomermodule" resultMap="CustomerModuleMap">
+        select * from customermodule
+        left join customerfun on customerfun.mid =customermodule.mid
+    </select>
+
+    <select id="showCustomerModulePage" resultMap="CustomerModuleMap">
+        select * from customermodule
+        left join customerfun on customerfun.mid =customermodule.mid
+    </select>
+
+
+    <select id="showCustomerModule" resultMap="CustomerMap">
+        select * from customer
+        left join customerrole_cust on customerrole_cust.cid =customer.cid
+        left join customerrole on customerrole_cust.CrId = customerrole.CrId
+        left join customerrolemodule on customerrolemodule.crid = customerrole.crid
+        left join customermodule on customermodule.Mid = customerrolemodule.mid
+        left join customerfun on customerfun.mid = customermodule.mid
+        left join customerauth on customerauth.cid = customer.cid
+        left join customerAuthority on customerAuthority.caid = customerauth.Caid
+        where customer.cname =#{cname}
+    </select>
+
+
+    <select id="showCustomerRm" resultMap="customerrolemoduleMap">
+          select * from customerrolemodule
+          left join customerrole on customerrole.crid =customerrolemodule.crid
+          left join customermodule on customermodule.mid =customerrolemodule.mid
+          where customerrole.crname =#{rname}
+    </select>
+
+    <insert id="AddCustomerModule" parameterType="Integer">
+        insert into customerrolemodule(crid,mid)values(#{param1},#{param2})
+    </insert>
+
+    <delete id="DelCustomerModule" parameterType="Integer">
+        delete from customerrolemodule where crid=#{param1} and mid=#{param2}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,21 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.aaa.Dao.InternalconfigDao">
+
+    <resultMap id="InternalconfigMap" type="com.aaa.Entity.Internalconfig">
+        <result property="interid" column="interid"></result>
+        <result property="steeringwheeladjustmentmode" column="steeringwheeladjustmentmode"></result>
+        <result property="steeringwheelmaterial" column="steeringwheelmaterial"></result>
+        <result property="steeringwheelmultifunction" column="steeringwheelmultifunction"></result>
+        <result property="steeringwheelheating" column="steeringwheelheating"></result>
+        <result property="computerscreen" column="computerscreen"></result>
+        <result property="rearcupholder" column="rearcupholder"></result>
+    </resultMap>
+
+    <insert id="AddInternalconfig">
+        insert into internalconfig
+        values(#{steeringwheeladjustmentmode},#{steeringwheelmaterial},#{steeringwheelmultifunction},#{steeringwheelheating},#{computerscreen},#{rearcupholder})
+    </insert>
+
+</mapper>
