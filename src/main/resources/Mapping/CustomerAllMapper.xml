@@ -97,6 +97,31 @@
     </resultMap>
 
 
+    <resultMap id="TestRole" type="com.aaa.Entity.Customer">
+        <result property="cid" column="cid"></result>
+        <result property="cname" column="cname"></result>
+        <result property="ctname" column="ctname"></result>
+        <result property="ctelphone" column="ctelphone"></result>
+        <result property="caddress" column="caddress"></result>
+        <result property="cidcard" column="cidcard"></result>
+        <result property="csex" column="csex"></result>
+        <result property="cpassword" column="cpassword"></result>
+        <result property="handpic" column="handpic"></result>
+        <result property="cstatus" column="cstatus"></result>
+        <result property="isexpired" column="isexpired"></result>
+        <result property="islocked" column="islocked"></result>
+        <result property="isCreExpired" column="isCreExpired"></result>
+        <result property="isenable" column="isenable"></result>
+
+
+        <association property="customerrole_cust" javaType="com.aaa.Entity.Customerrole_cust">
+            <result property="Cuid" column="Cuid"></result>
+            <result property="Cid" column="Cid"></result>
+            <result property="Crid" column="Crid"></result>
+        </association>
+    </resultMap>
+
+
     <select id="showCustomer" resultMap="CustomerMap">
         select * from customer
         left join customerrole_cust on customerrole_cust.cid =customer.cid
@@ -136,17 +161,26 @@
         select * from customerrole
     </select>
 
-    <select id="showCustomerId" resultMap="CustomerMap">
+    <select id="showCustomerId" resultMap="CustomerPage">
         select * from customer
         left join customerrole_cust on customerrole_cust.cid =customer.cid
         left join customerrole on customerrole_cust.CrId = customerrole.CrId
-        left join customerrolemodule on customerrolemodule.crid = customerrole.crid
-        left join customermodule on customermodule.Mid = customerrolemodule.mid
-        left join customerfun on customerfun.mid = customermodule.mid
-        left join customerauth on customerauth.cid = customer.cid
-        left join customerAuthority on customerAuthority.caid = customerauth.Caid
         where customer.cid =#{cid}
     </select>
+
+    <select id="showCustomerRc" resultType="com.aaa.Entity.Customerrole_cust">
+        select * from customerrole_cust where cid=#{cid}
+    </select>
+
+    <update id="UpCustomerRc" parameterType="Integer">
+        update customerrole_cust set crid =#{crid} where cuid=#{cuid}
+    </update>
+
+    <insert id="AddCustomerRole" parameterType="Integer">
+        insert into customerrole_cust(cid,crid)values(#{cid},#{crid})
+    </insert>
+
+
 
 
 

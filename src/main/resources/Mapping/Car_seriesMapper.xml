@@ -28,6 +28,8 @@
         </association>
     </resultMap>
 
+
+
     <select id="showCarSericeMsg" resultMap="CarSerMapper">
         select cs.id,csg.csgname,cb.`name`,cs.full_name,cs.csname,cs.firstletter,cs.seriesstate,cs.seriesorder from car_series cs
                 left join car_brand cb on cs.brand_id = cb.id
@@ -39,4 +41,9 @@
                 left join car_brand cb on cs.brand_id = cb.id
                 left join car_series_group csg on cs.group_id = csg.id
     </select>
+
+    <select id="showCar_series" resultMap="CarSerMapper">
+        select * from car_series where full_name like '${full_name}'
+    </select>
+
 </mapper>
