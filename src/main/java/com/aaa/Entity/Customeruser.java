@@ -7,6 +7,7 @@ import lombok.ToString;
 @ToString
 public class Customeruser {
 
+    private Integer Cuid;
     private String Cuname;
     private String CuTname;
     private String Cutelphone;
@@ -15,6 +16,6 @@ public class Customeruser {
     private String Cusex;
     private String Cupassword;
     private String CuhandPic;
-    private String Custatus;
+    private Integer Custatus;
 
 }
