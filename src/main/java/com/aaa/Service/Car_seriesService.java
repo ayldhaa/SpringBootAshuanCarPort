@@ -28,4 +28,9 @@ public class Car_seriesService implements Car_seriesImple {
         PageInfo<Car_series> seriesPageInfo = new PageInfo<>(car_series);
         return seriesPageInfo;
     }
+
+    @Override
+    public List<Car_series> showCar_series(String full_name) {
+        return car_seriesDao.showCar_series(full_name);
+    }
 }
