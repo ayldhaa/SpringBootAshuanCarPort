@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript" src="/js/vue.js"></script> <!--在上-->
+
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 JavaScript-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+
+    <script src="/js/vue-axios.js"></script>
+
+    <script src="/utils/http.js"></script>
+
+
+</head>
+<body>
+
+
+<div id="app">
+
+        <el-button type="primary">主要按钮</el-button>
+        <div>{{a}}</div>
+
+
+
+</div>
+
+
+
+
+
+</body>
+
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<script>
+    let js_this = window;
+    new Vue({
+        el: '#app',
+        data(){
+            return {
+                a:'',
+            }
+        },
+        methods:{
+            Test1:function () {
+                let thisV =this;
+                /*axios.post("http://localhost:8091/CuAll/showCustomer").then(function (response) {
+                    console.log(response);
+                    thisV.a =response;
+                });*/
+                js_this.axiosPostRequst("/CuAll/showCustomer").then(function (response) {
+                    console.log(response);
+                    thisV.a = response;
+                }).catch(function (error) {
+                    console.log("请求失败"+error);
+                })
+            }
+        },
+        created:function() {
+            this.Test1();
+        }
+
+    })
+</script>
+
+</html>
