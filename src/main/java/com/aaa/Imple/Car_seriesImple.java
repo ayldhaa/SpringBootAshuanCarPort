@@ -10,4 +10,8 @@ public interface Car_seriesImple {
     List<Car_series> showCarSericeMsg();
 
     PageInfo<Car_series> showCarSericePage(Integer pageNum, Integer pageSize);
+
+    List<Car_series> showCar_series(String full_name);
+
+
 }
