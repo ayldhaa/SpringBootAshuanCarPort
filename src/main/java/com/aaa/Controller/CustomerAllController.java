@@ -20,7 +20,7 @@ public class CustomerAllController {
     @Autowired
     private CustomerAllService customerAllService;
 
-    @PostMapping("/showCustomer")
+            @PostMapping("/showCustomer")
     public List<Customer> showCustomer()
     {
         System.out.println("进入方法");
