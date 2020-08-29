@@ -9,6 +9,11 @@ spring:
     password: admin
     url: jdbc:mysql://localhost:3306/gzsql?&useSSL=false&serverTimezone=Asia/Shanghai
 
+  resources:
+    static-locations: classpath:/META- INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,classpath:/templates/
+
+  jackson:
+    default-property-inclusion: non_null
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml
