@@ -2,6 +2,7 @@ package com.aaa.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -14,7 +15,11 @@ public class MymvcConfig implements WebMvcConfigurer {
 
         /*registry.addInterceptor(new JWTInterceptor()).addPathPatterns("/**")
                 .excludePathPatterns("/login");*/
-
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").
+                addResourceLocations("classpath:/static/");
+    }
 }
