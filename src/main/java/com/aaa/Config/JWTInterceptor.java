@@ -16,7 +16,7 @@ import java.util.Map;
 @Configuration
 public class JWTInterceptor implements HandlerInterceptor {
 
-    @Override
+    /*@Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Map<String,Object> map = new HashMap<String,Object>();
         //获取请求头中的token
@@ -43,7 +43,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         response.setContentType("application/json;charset=UTF-8");//指定是json格式
         response.getWriter().println(json);
         return false;
-    }
+    }*/
 
 
 }
