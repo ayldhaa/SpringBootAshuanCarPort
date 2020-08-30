@@ -10,8 +10,6 @@ import java.util.List;
 public interface Car_infoDao {
 
     //查询汽车详情
-    List<Car_info> showCarInfoMsg();
+    List<Car_info> showCarInfoMsg(String brand_name,String full_name);
 
-    //分页查询
-    PageInfo<Car_info> showCarInfoPage(Integer pageNum,Integer pageSize);
 }
