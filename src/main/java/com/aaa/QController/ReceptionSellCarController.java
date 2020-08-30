@@ -32,6 +32,20 @@ public class ReceptionSellCarController {
         return "Menu/RegisterSellCarTow";
     }
 
+    /*支付页面打开*/
+    @RequestMapping("/TestPayMsg")
+    public String TestPayMsg()
+    {
+        System.out.println("支付页面打开");
+        return "Menu/TestPay";
+    }
+
+    @RequestMapping("/TestUps")
+    public String TestUps()
+    {
+        System.out.println("上传方法");
+        return "Menu/TestUpLoad";
+    }
 
 
 }

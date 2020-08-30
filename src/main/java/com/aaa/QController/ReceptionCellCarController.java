@@ -4,6 +4,7 @@ import com.aaa.Dao.CustomerDao;
 import com.aaa.Entity.Car_series;
 import com.aaa.Entity.Customercellcar;
 import com.aaa.Entity.Customeruser;
+import com.aaa.Entity.SysResult;
 import com.aaa.Imple.ReceptionCellCarImple;
 import com.aaa.Service.Car_seriesService;
 import com.aaa.Service.ReceptionCellCarService;
@@ -15,11 +16,12 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import sun.misc.BASE64Encoder;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,6 +145,10 @@ public class ReceptionCellCarController {
     {
         return cellCarService.showCustomerCellCar(cuid);
     }
+
+
+
+
 
 
 

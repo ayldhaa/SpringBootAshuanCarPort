@@ -10,13 +10,14 @@ import javax.annotation.Resource;
 
 @CrossOrigin
 @RestController
+@RequestMapping("pay")
 public class ReceptionPayController {
 
     @Resource
     private Alipay aliPay;
 
 
-    @PostMapping(value = "order/alipay")
+    @RequestMapping("/TestPay")
     public String alipay(@RequestBody AlipayUntil alipayUntil) throws AlipayApiException {
 
         AlipayBean alipayBean = new AlipayBean();
