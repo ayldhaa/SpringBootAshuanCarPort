@@ -13,10 +13,10 @@ public class Car_infoController {
     @Autowired
     private Car_infoService car_infoService;
 
-    @PostMapping("/showCarInfo/{pageNum}")
+    /*@PostMapping("/showCarInfo/{pageNum}")
     public PageInfo<Car_info> showCarInfo(@PathVariable("pageNum")Integer pageNum,
                                           @RequestParam(name = "pageSize",defaultValue = "8")Integer pageSize){
         PageInfo<Car_info> carInfoPageInfo = car_infoService.showCarInfoPage(pageNum, pageSize);
         return carInfoPageInfo;
-    }
+    }*/
 }
