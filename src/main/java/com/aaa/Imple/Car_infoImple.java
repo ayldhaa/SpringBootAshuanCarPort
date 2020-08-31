@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface Car_infoImple {
 
-    List<Car_info> showCarInfoMsg();
+    List<Car_info> showCarInfoMsg(String brand_name,String full_name);
 
-    PageInfo<Car_info> showCarInfoPage(Integer pageNum, Integer pageSize);
 }

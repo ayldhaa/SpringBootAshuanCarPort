@@ -20,6 +20,12 @@ public interface CustomerImple {
 
     public List<Customerfun> showCustomerfun();
 
+    Integer EditCustomer(Customer customer);
+
+    Integer AddCustomer(Customer customer);
+
+
+
 
 
 
