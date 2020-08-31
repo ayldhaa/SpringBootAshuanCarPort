@@ -16,16 +16,9 @@ public class Car_infoService implements Car_infoImple {
     @Autowired
     private Car_infoDao car_infoDao;
 
-    @Override
-    public List<Car_info> showCarInfoMsg() {
-        return car_infoDao.showCarInfoMsg();
-    }
 
     @Override
-    public PageInfo<Car_info> showCarInfoPage(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
-        List<Car_info> carInfos = car_infoDao.showCarInfoMsg();
-        PageInfo<Car_info> carInfoPageInfo = new PageInfo<>(carInfos);
-        return carInfoPageInfo;
+    public List<Car_info> showCarInfoMsg(String brand_name, String full_name) {
+        return car_infoDao.showCarInfoMsg(brand_name,full_name);
     }
 }

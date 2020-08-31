@@ -45,4 +45,16 @@ public class CustomerService implements CustomerImple {
     public List<Customerfun> showCustomerfun() {
         return customerDao.showCustomerfun();
     }
+
+    @Override
+    public Integer EditCustomer(Customer customer) {
+        return null;
+    }
+
+    @Override
+    public Integer AddCustomer(Customer customer) {
+        return null;
+    }
+
+
 }
