@@ -20,9 +20,4 @@ public class Car_info {
     public Integer minprice;
     public Integer maxprice;
     public String year;
-
-    public Car_brand car_brand;
-    public Car_series_group car_series_group;
-    public Car_series car_series;
-
 }
