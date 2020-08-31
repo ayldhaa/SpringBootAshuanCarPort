@@ -24,4 +24,8 @@ public interface CustomerDao {
     //查询所有二级
     public List<Customerfun> showCustomerfun();
 
+    Integer EditCustomer(Customer customer);
+
+    Integer AddCustomer(Customer customer);
+
 }
