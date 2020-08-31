@@ -21,5 +21,24 @@
     </select>
 
 
+    <select id="findAll" resultMap="CutTIP_Map">
+        select * from customerTestingPeople left join customerinspector on customerTestingPeople.Ctid = customerinspector.CIid
+    </select>
+
+    <resultMap id="CutTIP_Map" type="com.aaa.Entity.CustomerTestIngPeople" autoMapping="true">
+        <collection property="customerInspectors" javaType="List" ofType="com.aaa.Entity.CustomerInspector" autoMapping="true">
+            <id property="CIid" column="CIid"></id>
+        </collection>
+    </resultMap>
+
+    <select id="findCuState" resultMap="CutTIP_Map">
+        select * from customerTestingPeople left join customerinspector on customerTestingPeople.Ctid = customerinspector.CIid  where customerTestingPeople.CuState = #{param1}
+    </select>
+
+    <update id="chageStatus">
+        update CustomerTestIngPeople set Custate = #{param1} where Ctid = #{param2}
+    </update>
+
+
 
 </mapper>

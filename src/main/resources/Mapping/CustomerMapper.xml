@@ -117,4 +117,16 @@
         select * from customerfun
     </select>
 
+
+    <update id="EditCustomer" parameterType="com.aaa.Entity.Customer">
+        update customer set cname = #{cname},ctname =#{ctname},chandPic=#{handpic},ctelphone= #{ctelphone}, csex = #{csex},cstatus=#{cstatus} where cid = #{cid}
+    </update>
+
+    <insert id="AddCustomer">
+        insert into customer (cname,ctname,ctelphone,chandPic,csex,cstatus) values (#{cname},#{ctname},#{ctelphone},#{handpic},#{csex},#{cstatus})
+    </insert>
+
+
+
+
 </mapper>

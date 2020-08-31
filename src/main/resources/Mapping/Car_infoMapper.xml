@@ -18,44 +18,12 @@
         <result property="minprice" column="minprice"></result>
         <result property="maxprice" column="maxprice"></result>
         <result property="year" column="year"></result>
-
-        <association property="car_brand" javaType="com.aaa.Entity.Car_brand">
-            <result column="id" property="id"></result>
-            <result column="name" property="name"></result>
-            <result column="img" property="img"></result>
-            <result column="firstletter" property="firstletter"></result>
-        </association>
-
-        <association property="car_series_group" javaType="com.aaa.Entity.Car_series_group">
-            <result property="id" column="id"></result>
-            <result property="brand_id" column="brand_id"></result>
-            <result property="csgname" column="csgname"></result>
-            <result property="firstletter" column="firstletter"></result>
-        </association>
-
-        <association property="car_series" javaType="com.aaa.Entity.Car_series">
-            <result column="id" property="id"></result>
-            <result column="group_id" property="group_id"></result>
-            <result column="brand_id" property="brand_id"></result>
-            <result column="full_name" property="full_name"></result>
-            <result column="csname" property="csname"></result>
-            <result column="firstletter" property="firstletter"></result>
-            <result column="seriesstate" property="seriesstate"></result>
-            <result column="seriesorder" property="seriesorder"></result>
-        </association>
     </resultMap>
 
+
     <select id="showCarInfoMsg" resultMap="CarInfoMapper">
-        select ci.*,cb.`name`,csg.csgname,cs.csname from car_info ci
-                left join car_brand cb on ci.brand_id = cb.id
-                left join car_series cs on ci.series_id = cs.id
-                left join car_series_group csg on ci.group_id = csg.id
+          select * from car_info where brand_name like '%${param1}%' and full_name like '%${param2}%'
     </select>
 
-    <select id="showCarInfoPage" resultMap="CarInfoMapper">
-        select ci.*,cb.`name`,csg.csgname,cs.csname from car_info ci
-                left join car_brand cb on ci.brand_id = cb.id
-                left join car_series cs on ci.series_id = cs.id
-                left join car_series_group csg on ci.group_id = csg.id
-    </select>
+
 </mapper>
