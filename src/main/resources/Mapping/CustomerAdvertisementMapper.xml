@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.Dao.CustomerAdvertisementDao">
+    <select id="findAll" resultMap="C_U_Map">
+        select * from customeradvertisement cumatn left join customeruser cumu on cumatn.cid = cumu.cuid left join customertestreorder custmorder on custmorder.ctoid = cumatn.ctoId
+    </select>
+
+    <resultMap id="C_U_Map" type="com.aaa.Entity.CustomerAdvertisement" autoMapping="true">
+        <association property="customeruser" resultMap="com.aaa.Dao.CustomerUserDao.Csu_Map"></association>
+        <association property="customerTestOrder" autoMapping="true"></association>
+    </resultMap>
+</mapper>

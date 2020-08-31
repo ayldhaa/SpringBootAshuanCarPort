@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.Dao.CustomerTestOrderDao">
+    <select id="findAll" resultMap="CusOrder_Map">
+      select * from CustomerTestreOrder
+      left join customeruser on customertestreorder.cid = customeruser.Cuid
+      left join CustomerInspector on CustomerInspector.CIid =  CustomerTestreOrder.cIid
+    </select>
+
+    <resultMap id="CusOrder_Map" type="com.aaa.Entity.CustomerTestOrder" autoMapping="true">
+        <association property="customeruser" autoMapping="true"></association>
+        <association property="customerInspector"  autoMapping="true">
+        </association>
+    </resultMap>
+</mapper>

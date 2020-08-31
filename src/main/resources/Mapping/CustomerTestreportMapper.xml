@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.Dao.CustomerTestreportDao">
+    <select id="findAll" resultMap="CumTport_Map">
+        select * from customerTestreport
+    </select>
+
+    <resultMap id="CumTport_Map" type="com.aaa.Entity.CustomerTestreport">
+        <id property="tpoid" column="tpoid"></id>
+        <result property="startid" column="startid"></result>
+        <result property="cftid" column="cftid"></result>
+    </resultMap>
+</mapper>
