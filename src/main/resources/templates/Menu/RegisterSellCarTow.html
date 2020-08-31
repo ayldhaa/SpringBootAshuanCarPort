@@ -635,11 +635,14 @@
                                                                 width="150">
                                                         </el-table-column>
 
-                                                        <el-table-column
-                                                                prop="carImg"
-                                                                label="车辆图片"
-                                                                width="120">
+                                                        <el-table-column label="车辆图片" width="150">
+                                                            <template scope="scope">
+                                                                <img :src="scope.row.carImg" width="100" height="50" class="head_pic"/>
+                                                            </template>
                                                         </el-table-column>
+
+
+
 
 
                                                         <el-table-column

@@ -319,36 +319,35 @@
 
                             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
 
-                                <el-form-item label="用户名" prop="cuname">
-                                    <el-input v-model="ruleForm.cuname"></el-input>
+                                <el-form-item label="用户名" prop="cloginname">
+                                    <el-input v-model="ruleForm.cloginname"></el-input>
                                 </el-form-item>
 
-                                <el-form-item label="密码" prop="cupassword">
-                                    <el-input type="password" v-model="ruleForm.cupassword"></el-input>
+                                <el-form-item label="密码" prop="cpassword">
+                                    <el-input type="password" v-model="ruleForm.cpassword"></el-input>
                                 </el-form-item>
 
-                                <el-form-item label="负责人" prop="cupassword">
-                                    <el-input type="password" v-model="ruleForm.cupassword"></el-input>
+                                <el-form-item label="负责人" prop="cpeoplename">
+                                    <el-input type="text" v-model="ruleForm.cpeoplename"></el-input>
                                 </el-form-item>
 
-                                <el-form-item label="检车商名称" prop="cuTname">
-                                    <el-input v-model="ruleForm.cuTname"></el-input>
+                                <el-form-item label="检车商名称" prop="ctname">
+                                    <el-input v-model="ruleForm.ctname"></el-input>
                                 </el-form-item>
 
-                                <el-form-item label="经营地地址" prop="cuTname">
-                                    <el-input v-model="ruleForm.cuTname"></el-input>
+                                <el-form-item label="经营地地址" prop="cuaddress">
+                                    <el-input v-model="ruleForm.cuaddress"></el-input>
                                 </el-form-item>
 
 
 
-                                <el-form-item label="经营地实景" prop="cuTname">
+                                <el-form-item label="经营地实景" prop="cpig">
 
 
 
                                     <el-upload
-                                            action="#"
-                                            list-type="picture-card"
-                                            :auto-upload="false">
+                                            action="http://localhost:8091/Shop/upload1"
+                                            list-type="picture-card">
                                         <i slot="default" class="el-icon-plus"></i>
                                         <div slot="file" slot-scope="{file}">
                                             <img
@@ -391,8 +390,8 @@
 
 
 
-                                <el-form-item label="手机号" prop="cutelphone">
-                                    <el-input v-model="ruleForm.cutelphone" id="cutelphone"></el-input>
+                                <el-form-item label="手机号" prop="ctelphone">
+                                    <el-input v-model="ruleForm.ctelphone" id="ctelphone"></el-input>
                                 </el-form-item>
 
                                 <el-form-item>
@@ -605,37 +604,38 @@
         data: {
             ReuMsg: "",
             ruleForm: {
-                cuname: '',
-                cupassword: '',
-                cuTname: '',
-                cusex: '',
-                cutelphone: '',
-                name: '',
+                ctname: '',
+                cpeoplename: '',
+                ctelphone: '',
+                cuaddress: '',
+                cloginname: '',
+                cpassword: '',
+                cpig: ''
             },
 
             rules: {
-                name: [
-                    { required: true, message: '请输入验证码', trigger: 'blur' },
+                ctname: [
+                    { required: true, message: '请输入商铺名称', trigger: 'blur' },
                 ],
-                cuname: [
+                cpeoplename: [
                     { required: true, message: '请选择用户名', trigger: 'change' },
                     { min: 3, max: 18, message: '长度在 3 到 18 个字符', trigger: 'blur' }
                 ],
-                cupassword: [
-                    { required: true, message: '请输入密码', trigger: 'change' },
+                cuaddress: [
+                    { required: true, message: '请输入商铺地址', trigger: 'change' },
                     { min: 8, max: 12, message: '长度在 8 到 12 个字符', trigger: 'blur' }
                 ],
-                cuTname: [
-                    { required: true, message: '请输入真实姓名', trigger: 'change' },
-                    { min: 2, max: 8, message: '长度在 2 到 5 个字符', trigger: 'blur' }
+                cloginname: [
+                    { required: true, message: '请输入用户名', trigger: 'change' },
+                    { min: 2, max: 12, message: '长度在 2 到 12 个字符', trigger: 'blur' }
                 ],
-                cusex: [
-                    { required: true, message: '请选择性别', trigger: 'change' }
+                cpassword: [
+                    { required: true, message: '请输入密码', trigger: 'blur' }
                 ],
-                cutelphone: [
+                ctelphone: [
                     { required: true, message: '请输入手机号', trigger: 'change' },
                     { min: 11, max: 11, message: '手机号长度为11', trigger: 'blur' }
-                ]
+                ],
             },
             dialogVisible: false,
             disabled: false
@@ -647,7 +647,7 @@
                 var storage =window.sessionStorage;
 
                 const thisV =this;
-                var Usertel =$("#cutelphone").val();
+                var Usertel =$("#ctelphone").val();
                 alert(Usertel);
                 if(Usertel =="" ||Usertel.length<11)
                 {
@@ -690,26 +690,24 @@
                 }
             },
             submitForm(formName) {
+                var storage =window.sessionStorage;
                 this.$refs[formName].validate((valid) => {
                     const thisV =this;
                     if (valid) {
-                        console.log("获取表单值:",this.ruleForm);
 
                         var storage =window.sessionStorage;
                         var CheMsg =storage.getItem("Okmsg");
                         if(this.ruleForm.name ==CheMsg)
                         {
-                            axios.post("http://localhost:8091/ReceptionUser/AddReceptionUser",this.ruleForm).then(function (response) {
-                                console.log("注册值:",response);
-                                if(response.data ==1)
-                                {
-                                    thisV.$message({
-                                        message: '恭喜你，注册成功',
-                                        type: 'success'
-                                    });
-                                    window.location.href ="http://localhost:8091/ReceLogin/Login";
-                                }
+                            alert("手机号校验成功");
+                            this.ruleForm.cpig =storage.getItem("ShopMsg");
+                            console.log("获取表单值:",this.ruleForm);
+                            axios.post("http://localhost:8091/Shop/Addcustomertestingpeople",this.ruleForm).then(function (response) {
+                                console.log(response);
                             })
+
+
+
                         }else
                         {
                             this.$message({
@@ -730,13 +728,18 @@
                 this.$refs[formName].resetFields();
             },
             handleRemove(file) {
-                console.log(file);
+                /*var CarMsgs =file.name;
+                var storage =window.sessionStorage;
+                storage.setItem("CarMsg",CarMsgs);*/
             },
             handlePictureCardPreview(file) {
                 this.dialogVisible = true;
             },
             handleDownload(file) {
                 console.log(file);
+                var Shop =file.name;
+                var storage =window.sessionStorage;
+                storage.setItem("ShopMsg",Shop);
             }
 
 

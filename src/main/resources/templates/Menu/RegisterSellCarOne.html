@@ -359,9 +359,9 @@
                         <div class="register_left_form">
                             <!--action 图片上传的的实际路径    :auto-upload 是否自动提交-->
                             <el-upload
-                                    action="#"
+                                    action="http://localhost:8091/CellCar/upload1"
                                     list-type="picture-card"
-                                    :auto-upload="false">
+                                    >
                                 <i slot="default" class="el-icon-plus"></i>
 
 
@@ -404,8 +404,43 @@
 
                         </div>
 
+
+
+
+
                         <el-button type="primary" plain style="margin-top: 10px;" @click="GetCarMsg">自动获取车辆参数</el-button>
 
+                        <el-form :inline="true" :model="formInline" class="demo-form-inline" style="margin-left: 200px; margin-top: -40px;">
+
+                            <el-form-item label="品牌">
+                                <el-input v-model="formInline.BrandName" placeholder="请输入车辆品牌"></el-input>
+                            </el-form-item>
+
+                            <el-form-item label="款式">
+                                <el-input v-model="formInline.FullName" placeholder="请输入车辆款式"></el-input>
+                            </el-form-item>
+
+
+
+                            <el-form-item>
+                                <el-button type="primary" @click="onSubmit" plain>手动获取车辆参数</el-button>
+                            </el-form-item>
+                        </el-form>
+
+
+                        <!--第三个-->
+                        <el-form :inline="true" :model="EndForm" class="demo-form-inline" style="margin-left: 900px; margin-top: -70px;">
+                            <el-form-item label="车辆参数信息">
+                                <el-select v-model="EndForm.region" placeholder="请选择您的车辆" style="width:300px;">
+
+                                    <el-option v-for="a in endsCarMsg" :key="a.id" :label="a.full_name" :value="a.id"></el-option>
+
+                                </el-select>
+                            </el-form-item>
+                            <el-form-item>
+                                <el-button type="primary" @click="onSubmit2" plain>选择</el-button>
+                            </el-form-item>
+                        </el-form>
 
 
 
@@ -765,6 +800,13 @@
                 cutelphone: '',
                 name: '',
             },
+            formInline: {
+                BrandName: '',
+                FullName: ''
+            },
+            EndForm: {
+                region: '',
+            },
 
             dialogImageUrl: '',
             dialogVisible: false,
@@ -811,6 +853,8 @@
             },
             fullscreenLoading: false,
             processes:[],
+            endsCarMsg: [],
+
 
 
         },
@@ -828,6 +872,8 @@
                 var CarMsgs =file.name;
                 var storage =window.sessionStorage;
                 storage.setItem("CarMsg",CarMsgs);
+
+
             },
             /*点击获取车辆参数*/
             GetCarMsg:function () {
@@ -921,9 +967,10 @@
                 var userName =storage.getItem("RegisterUserName");
                 var endcarmsg =storage.getItem("CarMsg");
                 var endCarNameMsg =storage.getItem("endCarNameMsg");
+                var c ="/UserSellCar/"+endcarmsg;
                 console.log("获取最终车辆编号",endcarId);
                 console.log("获取登录人姓名",userName);
-                console.log("获取最后车辆图片",endcarmsg);
+                console.log("获取最后车辆图片",c);
                 console.log("获取到的车辆名称:",endCarNameMsg);
 
                 let UserId = null;
@@ -931,26 +978,135 @@
                     thisV.UserId =response.data[0].cuid;
                     storage.setItem("lsId",response.data[0].cuid);
 
+                    /*判断是否手动获取*/
+                    var TextId =storage.getItem("TextId");
+                    var TextCarMsg =storage.getItem("TextCarMsg");
+                    if(TextId !=null)
+                    {
 
-                    let data = {"carId":endcarId,"cuid":response.data[0].cuid,"carImg":endcarmsg,"carName":endCarNameMsg};
-                    axios.post("http://localhost:8091/CellCar/addReceptionCellCarController",data).then(function (response) {
-                        console.log(response);
-                        if(response.data ==1)
-                        {
-                            thisV.$message({
-                                showClose: true,
-                                message: '车辆上传成功,请去选择检车商进行车辆检验',
-                                type: 'success'
-                            });
-                            window.location.href ="http://localhost:8091/SellCar/SellCarTow";
-                        }
-                    });
+                        let data = {"carId":TextId,"cuid":response.data[0].cuid,"carImg":c,"carName":TextCarMsg};
+                    if(TextId ==null)
+                    {
+                        thisV.$message({
+                            message: '请先上传您的车辆信息',
+                            type: 'warning'
+                        });
+                    }else
+                    {
+                        axios.post("http://localhost:8091/CellCar/addReceptionCellCarController",data).then(function (response) {
+                            console.log(response);
+                            if(response.data ==1)
+                            {
+                                thisV.$message({
+                                    showClose: true,
+                                    message: '车辆上传成功,请去选择检车商进行车辆检验',
+                                    type: 'success'
+                                });
+                                window.location.href ="http://localhost:8091/SellCar/SellCarTow";
+                            }
+                        });
+                    }
+
+                    }else
+                    {
+                        let data = {"carId":endcarId,"cuid":response.data[0].cuid,"carImg":c,"carName":endCarNameMsg};
+                    if(endcarId ==null)
+                    {
+                        thisV.$message({
+                            message: '请先上传您的车辆信息',
+                            type: 'warning'
+                        });
+                    }else
+                    {
+                        axios.post("http://localhost:8091/CellCar/addReceptionCellCarController",data).then(function (response) {
+                            console.log(response);
+                            if(response.data ==1)
+                            {
+                                thisV.$message({
+                                    showClose: true,
+                                    message: '车辆上传成功,请去选择检车商进行车辆检验',
+                                    type: 'success'
+                                });
+                                window.location.href ="http://localhost:8091/SellCar/SellCarTow";
+                            }
+                        });
+                    }
+
+
+                    }
                 });
+            },
+            /*手动获取*/
+            onSubmit() {
+                console.log('submit!');
+                console.log("这个对象",this.formInline);
+                var storage =window.sessionStorage;
+                if(this.formInline.BrandName =="" || this.formInline.FullName =="")
+                {
+                    this.$message({
+                        message: '品牌或者款式不能为空',
+                        type: 'warning'
+                    });
+                }else
+                {
+                    const thisV =this;
+                 axios.post("http://localhost:8091/CellCar/showSCarMsg/"+this.formInline.BrandName+"/"+this.formInline.FullName+"").then(function (response) {
+                     if(response.data !="")
+                     {
+                         storage.setItem("TextCarMsg",response.data[0].series_name);
+                         storage.setItem("TextId",response.data[0].id);
+                         console.log("两个文本框第一次获取",response);
+
+                         thisV.$message({
+                             showClose: true,
+                             message: '成功为您获取到车辆信息,请您选择',
+                             type: 'success'
+                         });
+                         thisV.endsCarMsg =response.data;
+                     }else
+                     {
+                         thisV.$message({
+                             message: '请上传正确的车辆信息',
+                             type: 'warning'
+                         });
+                     }
+                 })
+                }
+            },
+            /*手动获取参数*/
+            onSubmit2() {
+                console.log('submit!');
+                console.log("手动信息2",this.EndForm.region);
+                const thisV =this;
+
+                const loading = thisV.$loading({
+                    lock: true,
+                    text: '正在获取您的车辆参数信息',
+                    spinner: 'el-icon-loading',
+                    background: 'rgba(0, 0, 0, 0.7)'
+                });
+                setTimeout(() => {
+                    loading.close();
+                }, 2500);
 
 
+                axios.post("http://localhost:8091/CellCar/GetCarMsgOk/"+this.EndForm.region+"").then(function (response) {
+                    console.log("最终详情",response);
+                    thisV.body =response.data.result.body;
+                    thisV.chassisbrake =response.data.result.chassisbrake;
+                    thisV.drivingauxiliary =response.data.result.drivingauxiliary;
+                    thisV.doormirror =response.data.result.doormirror;
+                    thisV.internalconfig =response.data.result.internalconfig;
+                    if(response.data.result.body !=null)
+                    {
+                        thisV.$message({
+                            showClose: true,
+                            message: '成功为您获取您的车辆参数信息',
+                            type: 'success'
+                        });
+                    }
 
-
-
+                })
 
             }
 
