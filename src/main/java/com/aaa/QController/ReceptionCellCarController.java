@@ -1,15 +1,14 @@
 package com.aaa.QController;
 
 import com.aaa.Dao.CustomerDao;
-import com.aaa.Entity.Car_series;
-import com.aaa.Entity.Customercellcar;
-import com.aaa.Entity.Customeruser;
-import com.aaa.Entity.SysResult;
+import com.aaa.Entity.*;
 import com.aaa.Imple.ReceptionCellCarImple;
+import com.aaa.Service.Car_infoService;
 import com.aaa.Service.Car_seriesService;
 import com.aaa.Service.ReceptionCellCarService;
 import com.aaa.Service.ReceptionUserService;
 import com.aaa.Util.HttpUtils;
+import com.aaa.Util.UploadUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpResponse;
@@ -38,6 +37,9 @@ public class ReceptionCellCarController {
 
     @Autowired
     private ReceptionCellCarService cellCarService;
+
+    @Autowired
+    private Car_infoService car_infoService;
 
 
 
@@ -136,6 +138,7 @@ public class ReceptionCellCarController {
     @ResponseBody
     public Integer addReceptionCellCarController(@RequestBody Customercellcar customercellcar){
         customercellcar.setCIid(0);
+
         return cellCarService.AddCellCar(customercellcar);
     };
 
@@ -144,6 +147,38 @@ public class ReceptionCellCarController {
     public List<Customercellcar> showUCellCar(@PathVariable("cuid")Integer cuid)
     {
         return cellCarService.showCustomerCellCar(cuid);
+    }
+
+    /*车辆图片上传*/
+    @PostMapping("/upload1")
+    @ResponseBody
+    public String upload1(@RequestParam("file") MultipartFile file) throws IOException {
+        String filename = file.getOriginalFilename();
+
+        // 存放上传图片的文件夹
+        File fileDir = UploadUtils.getImgDirFile();
+        // 输出文件夹绝对路径  -- 这里的绝对路径是相当于当前项目的路径而不是“容器”路径
+        System.out.println(fileDir.getAbsolutePath());
+
+        try {
+            // 构建真实的文件路径
+            File newFile = new File(fileDir.getAbsolutePath() + File.separator + filename);
+            System.out.println(newFile.getAbsolutePath());
+            // 上传图片到 -》 “绝对路径”
+            file.transferTo(newFile);
+            System.out.println("上传成功");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /*手动上传 先获取车辆id*/
+    @PostMapping("/showSCarMsg/{param1}/{param2}")
+    @ResponseBody
+    public List<Car_info> showSCarMsg(@PathVariable("param1") String param1,@PathVariable("param2") String param2)
+    {
+        return car_infoService.showCarInfoMsg(param1,param2);
     }
 
 
